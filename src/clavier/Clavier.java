@@ -2,7 +2,7 @@
  * Ici les individus sont les différentes configurations des claviers
  */
 
-package claviers;
+package clavier;
 
 import java.util.Random;
 
@@ -55,6 +55,19 @@ public class Clavier {
 		return eval;
 	}
 
+	public int evaluation(int lettre) {
+		int eval = 0;
+		int dist;
+		for (int i = 0; i < 26; i++) {
+			if (i == lettre) {
+				i++;
+			}
+			dist = Math.abs((i%10)-(lettre%10)) + Math.abs((i/10)-(lettre/10));
+			eval += (FreqBigrammes.getFrequence(i, lettre) * dist);
+		}
+		return eval;
+	}
+	
 	public Clavier croisement(Clavier i) {
 		return null;
 	}

@@ -1,6 +1,6 @@
 package algorithmes.recuitSimule;
 
-import claviers.Clavier;
+import clavier.Clavier;
 import algorithmes.IAlgo;
 
 public class RecuitSilule implements IAlgo {

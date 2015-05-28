@@ -1,6 +1,6 @@
 package algorithmes.genetique;
 
-import claviers.Clavier;
+import clavier.Clavier;
 import algorithmes.IAlgo;
 
 public class Genetique implements IAlgo {

@@ -1,4 +1,4 @@
-package claviers;
+package clavier;
 public class FreqBigrammes {
 
 	public static int[][] freqB = {

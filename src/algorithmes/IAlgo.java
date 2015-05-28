@@ -1,6 +1,6 @@
 package algorithmes;
 
-import claviers.Clavier;
+import clavier.Clavier;
 
 public interface IAlgo {
 
