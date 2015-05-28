@@ -5,7 +5,7 @@ import java.awt.BorderLayout;
 import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
 
-import modele.Modele;
+import modele.Model;
 
 
 public class VuePrincipale extends JFrame{
@@ -14,7 +14,7 @@ public class VuePrincipale extends JFrame{
 	
 	public VuePrincipale(){
 		super("Optimisation d'un clavier");
-		Modele mod = new Modele();
+		Model mod = new Model();
 		jtb1 = new JTabbedPane();
 		jtb1.add("Genetique", new VueGenetique(mod));
 		jtb1.add("Recuit simulé", new VueRecuit(mod));

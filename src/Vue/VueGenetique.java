@@ -12,7 +12,7 @@ import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
-import modele.Modele;
+import modele.Model;
 
 public class VueGenetique extends JPanel implements Observer{
 
@@ -24,12 +24,12 @@ public class VueGenetique extends JPanel implements Observer{
 	private JTextField popVal;
 	private JPanel jp;
 	private VueInformation vi;
-	private Modele mod;
+	private Model mod;
 
 	// TODO RAJOUTER LE MODELE
 
-	public VueGenetique(Modele mod) {
-		this.mod = new Modele();
+	public VueGenetique(Model mod) {
+		this.mod = mod;
 		this.vc = new VueClavier(mod);
 		vi = new VueInformation(mod);
 		lancer = new JButton("Lancer");
@@ -135,6 +135,6 @@ public class VueGenetique extends JPanel implements Observer{
 	@Override
 	public void update(Observable o, Object arg) {
 		lancer.setEnabled(mod.isMutaCorrect() && mod.isPopCorrect());
-		System.out.println(mod.isMutaCorrect());
+		
 	}
 }

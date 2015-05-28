@@ -6,16 +6,16 @@ import java.util.Observer;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import modele.Modele;
+import modele.Model;
 
 public class VueInformation extends JPanel implements Observer{
 	
 	private JLabel ite;
 	private JLabel fonctionObj;
-	private Modele mod;
+	private Model mod;
 	
 	//TODO ne pas oublier le model
-	public VueInformation(Modele mod) {
+	public VueInformation(Model mod) {
 		super();
 		this.mod = mod;
 		this.ite = new JLabel("nombre d'itérations: "); 

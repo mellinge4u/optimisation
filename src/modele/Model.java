@@ -4,7 +4,7 @@ import java.util.Observable;
 
 import algorithmes.IAlgo;
 
-public class Modele extends Observable {
+public class Model extends Observable {
 
 	private int temperature;
 	private int mutation;
@@ -16,7 +16,7 @@ public class Modele extends Observable {
 	private boolean mutaCorrect;
 	private IAlgo algo;
 
-	public Modele() {
+	public Model() {
 		temperature = 0;
 		mutation = 0;
 		population = 0;

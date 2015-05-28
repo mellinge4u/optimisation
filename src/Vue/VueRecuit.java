@@ -12,7 +12,7 @@ import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
-import modele.Modele;
+import modele.Model;
 
 public class VueRecuit extends JPanel {
 
@@ -22,11 +22,11 @@ public class VueRecuit extends JPanel {
 	private JTextField tempVal;
 	private JPanel jp;
 	private VueInformation vi;
-	private Modele mod;
+	private Model mod;
 
 	// TODO RAJOUTER LE MODELE
 
-	public VueRecuit(Modele mod) {
+	public VueRecuit(Model mod) {
 		this.mod = mod;
 		this.vc = new VueClavier(mod);
 		vi = new VueInformation(mod);
