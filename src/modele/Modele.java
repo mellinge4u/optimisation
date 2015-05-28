@@ -11,6 +11,9 @@ public class Modele extends Observable {
 	private int population;
 	private int iteration;
 	private int fctionObj;
+	private boolean tmpCorrect;
+	private boolean popCorrect;
+	private boolean mutaCorrect;
 	private IAlgo algo;
 
 	public Modele() {
@@ -18,6 +21,36 @@ public class Modele extends Observable {
 		mutation = 0;
 		population = 0;
 		// TODO instancier algo
+		tmpCorrect = true;
+		popCorrect = true;
+		mutaCorrect = true;
+	}
+
+	public boolean isTmpCorrect() {
+		return tmpCorrect;
+	}
+
+	public void setTmpCorrect(boolean tmpCorrect) {
+		this.tmpCorrect = tmpCorrect;
+		update();
+	}
+
+	public boolean isPopCorrect() {
+		return popCorrect;
+	}
+
+	public void setPopCorrect(boolean popCorrect) {
+		this.popCorrect = popCorrect;
+		update();
+	}
+
+	public boolean isMutaCorrect() {
+		return mutaCorrect;
+	}
+
+	public void setMutaCorrect(boolean mutaCorrect) {
+		this.mutaCorrect = mutaCorrect;
+		update();
 	}
 
 	public void update() {
