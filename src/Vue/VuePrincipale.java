@@ -5,7 +5,7 @@ import java.awt.BorderLayout;
 import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
 
-import modele.Model;
+import model.Model;
 
 
 public class VuePrincipale extends JFrame{

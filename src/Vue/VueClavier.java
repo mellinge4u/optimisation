@@ -9,7 +9,7 @@ import java.util.Observer;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-import modele.Model;
+import model.Model;
 
 public class VueClavier extends JPanel implements Observer{
 	

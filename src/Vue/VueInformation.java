@@ -6,7 +6,7 @@ import java.util.Observer;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import modele.Model;
+import model.Model;
 
 public class VueInformation extends JPanel implements Observer{
 	
