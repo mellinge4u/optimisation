@@ -37,6 +37,9 @@ public class Clavier {
 	}
 
 	public void genererClavier() {
+		int[] tmp = { -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+				-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 };
+		lettres = tmp;
 		Random r = new Random();
 		int touche;
 		for (int i = 0; i < lettres.length; i++) {
@@ -66,12 +69,21 @@ public class Clavier {
 		int eval = 0;
 		int dist;
 		for (int i = 0; i < lettres.length; i++) {
-			if (i == lettre) {
-				i++;
+			if (!(i == lettre)) {
+				dist = Math.abs((i % 10) - (lettre % 10))
+						+ Math.abs((i / 10) - (lettre / 10));
+				eval += (FreqBigrammes.getFrequence(i, lettre) * dist);
 			}
-			dist = Math.abs((i % 10) - (lettre % 10))
-					+ Math.abs((i / 10) - (lettre / 10));
-			eval += (FreqBigrammes.getFrequence(i, lettre) * dist);
+		}
+		return eval;
+	}
+
+	public int evaluationTouche(int touche) {
+		int eval = 0;
+		for (int i = 0; i < 26; i++) {
+			if (lettres[i] == touche) {
+				eval = evaluation(i);
+			}
 		}
 		return eval;
 	}
