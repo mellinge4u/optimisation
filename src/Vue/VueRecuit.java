@@ -38,28 +38,40 @@ public class VueRecuit extends JPanel {
 			 private void updateData() {
 			        // mise à jour de l'attribut data
 			        String data = tempVal.getText();
-			        System.out.println(data);
+			        update(data);
 			    }
 			
 			@Override
 			public void removeUpdate(DocumentEvent e) {
-				// TODO Auto-generated method stub
-				
+				String data = tempVal.getText();
+				update(data);
 			}
 			
 			@Override
 			public void insertUpdate(DocumentEvent e) {
-				// TODO Auto-generated method stub
-				
+				String data = tempVal.getText();
+				update(data);
 			}
 			
 			@Override
 			public void changedUpdate(DocumentEvent e) {
-				// TODO Auto-generated method stub
-		        String data = tempVal.getText();
-		        System.out.println(data);
-				
+		        String data = tempVal.getText();	
+		        update(data);
 			}
+			
+			public int update(String s){
+				int i;
+				try{
+					i = Integer.parseInt(s);
+					mod.setTemperature(i);
+					mod.setTmpCorrect(true);
+				}catch(NumberFormatException e){
+					i = 0;
+					mod.setTmpCorrect(false);
+				} 
+				return i;
+			}
+			
 		});
 		this.setLayout(new BorderLayout());
 		jp = new JPanel();
