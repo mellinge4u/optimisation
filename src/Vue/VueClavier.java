@@ -3,6 +3,8 @@ package Vue;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -16,6 +18,7 @@ public class VueClavier extends JPanel implements Observer {
 
 	private JButton[][] touches;
 	private Model mod;
+	private int i, j;
 
 	// TODO ne pas oublier le modele
 
@@ -26,13 +29,24 @@ public class VueClavier extends JPanel implements Observer {
 		// this.setPreferredSize(new Dimension(500,500));
 		this.setLayout(new GridLayout(4, 10));
 		this.touches = new JButton[10][4];
-		int t = 0;
-		for (int i = 0; i < touches[0].length; i++) {
-			for (int j = 0; j < touches.length; j++) {
+		for (i = 0; i < touches[0].length; i++) {
+			for (j = 0; j < touches.length; j++) {
 				touches[j][i] = new JButton();
 				touches[j][i].setPreferredSize(new Dimension(50, 50));
-				//touches[j][i].setEnabled(false);
+				// touches[j][i].setEnabled(false);
 				touches[j][i].setBackground(Color.LIGHT_GRAY);
+				touches[j][i].addActionListener(new ActionListener() {
+
+					int k = 10 * i + j;
+
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						javax.swing.JOptionPane.showMessageDialog(null,
+								"Évaluation de la touche : "
+										+ mod.getKeyboard().evaluationTouche(k));
+
+					}
+				});
 				this.add(touches[j][i]);
 			}
 		}
