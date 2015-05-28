@@ -11,8 +11,37 @@ public class Genetique implements IAlgo {
 
 	@Override
 	public Clavier getMeilleurClavier() {
-		// TODO Auto-generated method stub
+		initialisation();
+		do {
+			evaluation();
+			selection();
+			croisement();
+			mutation();
+		} while (arret());
 		return null;
 	}
 
+	public void initialisation() {
+		
+	}
+	
+	public void evaluation() {
+		
+	}
+	
+	public void selection() {
+		
+	}
+	
+	public void croisement() {
+		
+	}
+	
+	public void mutation() {
+		
+	}
+	
+	public boolean arret() {
+		return true;
+	}
 }
