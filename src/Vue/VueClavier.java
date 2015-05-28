@@ -9,14 +9,18 @@ import java.util.Observer;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import modele.Modele;
+
 public class VueClavier extends JPanel implements Observer{
 	
 	private JButton[][] touches;
+	private Modele mod;
 
 	//TODO ne pas oublier le modele
 	
-	public VueClavier(){
+	public VueClavier(Modele mod){
 		super();
+		this.mod = mod;
 //		this.setPreferredSize(new Dimension(500,500));
 		this.setLayout(new GridLayout(4,10));
 		this.touches = new JButton[10][4];

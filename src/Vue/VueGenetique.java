@@ -8,6 +8,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import modele.Modele;
+
 public class VueGenetique extends JPanel {
 
 	private VueClavier vc;
@@ -18,12 +20,14 @@ public class VueGenetique extends JPanel {
 	private JTextField popVal;
 	private JPanel jp;
 	private VueInformation vi;
+	private Modele mod;
 
 	// TODO RAJOUTER LE MODELE
 
-	public VueGenetique() {
-		this.vc = new VueClavier();
-		vi = new VueInformation();
+	public VueGenetique(Modele mod) {
+		this.mod = new Modele();
+		this.vc = new VueClavier(mod);
+		vi = new VueInformation(mod);
 		lancer = new JButton("Lancer");
 		mutation = new JLabel("Probabilité de mutation (%): ");
 		mutaVal = new JTextField("");
