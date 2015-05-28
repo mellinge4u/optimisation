@@ -1,5 +1,5 @@
 package claviers;
-public class freqBigrammes {
+public class FreqBigrammes {
 
 	public static int[][] freqB = {
 			{ 31, 242, 392, 208, 48, 135, 232, 37, 1255, 32, 7, 663, 350, 1378,
@@ -55,10 +55,6 @@ public class freqBigrammes {
 					9, 2, 4, 0, 0, 0, 0 },
 			{ 8, 0, 2, 6, 49, 3, 1, 0, 1, 1, 0, 11, 4, 2, 15, 4, 1, 0, 3, 1, 0,
 					7, 4, 0, 0, 2 } };
-
-	public static void fillFreqB(String s) {
-
-	}
 
 	public static int getFrequence(int char1, int char2) {
 		return freqB[char1][char2] + freqB[char2][char1];
