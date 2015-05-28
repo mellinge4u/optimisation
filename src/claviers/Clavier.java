@@ -16,7 +16,6 @@ public class Clavier {
 			touches[i] = r.nextInt(40);
 		}
 	}
-//wxcvghjk
 
 	public Clavier(String clavier) {
 		switch (clavier) {
