@@ -2,6 +2,8 @@ package model;
 
 import java.util.Observable;
 
+import clavier.Clavier;
+
 public class Model extends Observable {
 
 	private int temperature;
@@ -12,6 +14,7 @@ public class Model extends Observable {
 	private boolean tmpCorrect;
 	private boolean popCorrect;
 	private boolean mutaCorrect;
+	private Clavier keyboard;	// TODO Changer le nom, il n'est pas top.	PS : Pareil pour les geter et seter de c't'objet
 
 	public Model() {
 		temperature = 0;
@@ -21,69 +24,48 @@ public class Model extends Observable {
 		tmpCorrect = true;
 		popCorrect = true;
 		mutaCorrect = true;
+		keyboard = new Clavier("bepoj");
 	}
 
-	public boolean isTmpCorrect() {
-		return tmpCorrect;
+	public int getFctionObj() {
+		return fctionObj;
 	}
 
-	public void setTmpCorrect(boolean tmpCorrect) {
-		this.tmpCorrect = tmpCorrect;
-		update();
+	public int getIteration() {
+		return iteration;
 	}
 
-	public boolean isPopCorrect() {
-		return popCorrect;
-	}
-
-	public void setPopCorrect(boolean popCorrect) {
-		this.popCorrect = popCorrect;
-		update();
-	}
-
-	public boolean isMutaCorrect() {
-		return mutaCorrect;
-	}
-
-	public void setMutaCorrect(boolean mutaCorrect) {
-		this.mutaCorrect = mutaCorrect;
-		update();
-	}
-
-	public void update() {
-		setChanged();
-		notifyObservers();
-	}
-
-	public int getTemperature() {
-		return temperature;
-	}
-
-	public void setTemperature(int temperature) {
-		this.temperature = temperature;
-		update();
+	public Clavier getKeyboard() {
+		return keyboard;
 	}
 
 	public int getMutation() {
 		return mutation;
 	}
 
-	public void setMutation(int mutation) {
-		this.mutation = mutation;
-		update();
-	}
-
 	public int getPopulation() {
 		return population;
 	}
 
-	public void setPopulation(int population) {
-		this.population = population;
-		update();
+	public int getTemperature() {
+		return temperature;
 	}
 
-	public int getIteration() {
-		return iteration;
+	public boolean isMutaCorrect() {
+		return mutaCorrect;
+	}
+
+	public boolean isPopCorrect() {
+		return popCorrect;
+	}
+
+	public boolean isTmpCorrect() {
+		return tmpCorrect;
+	}
+
+	public void setFctionObj(int fctionObj) {
+		this.fctionObj = fctionObj;
+		update();
 	}
 
 	public void setIteration(int iteration) {
@@ -91,13 +73,43 @@ public class Model extends Observable {
 		update();
 	}
 
-	public int getFctionObj() {
-		return fctionObj;
+	public void setKeyboard(Clavier keyboard) {
+		this.keyboard = keyboard;
 	}
 
-	public void setFctionObj(int fctionObj) {
-		this.fctionObj = fctionObj;
+	public void setMutaCorrect(boolean mutaCorrect) {
+		this.mutaCorrect = mutaCorrect;
 		update();
+	}
+
+	public void setMutation(int mutation) {
+		this.mutation = mutation;
+		update();
+	}
+
+	public void setPopCorrect(boolean popCorrect) {
+		this.popCorrect = popCorrect;
+		update();
+	}
+
+	public void setPopulation(int population) {
+		this.population = population;
+		update();
+	}
+
+	public void setTemperature(int temperature) {
+		this.temperature = temperature;
+		update();
+	}
+
+	public void setTmpCorrect(boolean tmpCorrect) {
+		this.tmpCorrect = tmpCorrect;
+		update();
+	}
+
+	public void update() {
+		setChanged();
+		notifyObservers();
 	}
 
 }

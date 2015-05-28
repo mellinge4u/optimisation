@@ -31,7 +31,7 @@ public class VueClavier extends JPanel implements Observer {
 			for (int j = 0; j < touches.length; j++) {
 				touches[j][i] = new JButton();
 				touches[j][i].setPreferredSize(new Dimension(50, 50));
-				touches[j][i].setEnabled(false);
+				//touches[j][i].setEnabled(false);
 				touches[j][i].setBackground(Color.LIGHT_GRAY);
 				this.add(touches[j][i]);
 			}
@@ -46,12 +46,14 @@ public class VueClavier extends JPanel implements Observer {
 		for (int i = 0; i < touches[0].length; i++) {
 			for (int j = 0; j < touches.length; j++) {
 				touches[j][i].setText("");
+				touches[j][i].setEnabled(false);
 			}
 		}
 		for (int i = 0; i < 26; i++) {
 			touche = c.getTouche(i);
 			ch = (char) ('A' + i);
 			touches[touche % 10][touche / 10].setText("" + ch);
+			touches[touche % 10][touche / 10].setEnabled(true);
 		}
 	}
 }
