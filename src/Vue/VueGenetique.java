@@ -2,6 +2,8 @@ package Vue;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -12,7 +14,7 @@ import javax.swing.event.DocumentListener;
 
 import modele.Modele;
 
-public class VueGenetique extends JPanel {
+public class VueGenetique extends JPanel implements Observer{
 
 	private VueClavier vc;
 	private JButton lancer;
@@ -68,6 +70,7 @@ public class VueGenetique extends JPanel {
 				}catch(NumberFormatException e){
 					i = 0;
 					mod.setMutaCorrect(false);
+					//System.out.println(mod.isMutaCorrect());
 				} 
 				return i;
 			}
@@ -75,6 +78,46 @@ public class VueGenetique extends JPanel {
 		});
 		population = new JLabel("Taille de la population: ");
 		popVal = new JTextField("");
+		popVal.getDocument().addDocumentListener(new DocumentListener() {
+			
+			 private void updateData() {
+			        // mise à jour de l'attribut data
+			        String data = popVal.getText();
+			        update(data);
+			    }
+			
+			@Override
+			public void removeUpdate(DocumentEvent e) {
+				String data = popVal.getText();
+				update(data);
+			}
+			
+			@Override
+			public void insertUpdate(DocumentEvent e) {
+				String data = popVal.getText();
+				update(data);
+			}
+			
+			@Override
+			public void changedUpdate(DocumentEvent e) {
+		        String data = popVal.getText();	
+		        update(data);
+			}
+			
+			public int update(String s){
+				int i;
+				try{
+					i = Integer.parseInt(s);
+					mod.setPopulation(i);
+					mod.setPopCorrect(true);
+				}catch(NumberFormatException e){
+					i = 0;
+					mod.setPopCorrect(false);
+				} 
+				return i;
+			}
+			
+		});
 		this.setLayout(new BorderLayout());
 		jp = new JPanel();
 		jp.setLayout(new GridLayout(1, 4));
@@ -86,5 +129,12 @@ public class VueGenetique extends JPanel {
 		this.add(vc,BorderLayout.CENTER);
 		this.add(jp,BorderLayout.NORTH);
 		this.add(vi,BorderLayout.SOUTH);
+		mod.addObserver(this);
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		lancer.setEnabled(mod.isMutaCorrect() && mod.isPopCorrect());
+		System.out.println(mod.isMutaCorrect());
 	}
 }
