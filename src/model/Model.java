@@ -12,7 +12,7 @@ public class Model extends Observable {
 		genetique, recuit
 	};
 
-	private int temperature;
+	private double temperature;
 	private int mutation;
 	private int population;
 	private int iteration;
@@ -71,7 +71,7 @@ public class Model extends Observable {
 		return population;
 	}
 
-	public int getTemperature() {
+	public double getTemperature() {
 		return temperature;
 	}
 
@@ -147,7 +147,7 @@ public class Model extends Observable {
 		update();
 	}
 
-	public void setTemperature(int temperature) {
+	public void setTemperature(double temperature) {
 		this.temperature = temperature;
 		update();
 	}
