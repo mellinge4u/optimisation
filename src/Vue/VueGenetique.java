@@ -12,6 +12,7 @@ import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
+import ecouteurs.EcouteurLancer;
 import model.Model;
 
 public class VueGenetique extends JPanel implements Observer{
@@ -31,8 +32,9 @@ public class VueGenetique extends JPanel implements Observer{
 	public VueGenetique(Model mod) {
 		this.mod = mod;
 		this.vc = new VueClavier(mod, Model.algo.genetique);
-		vi = new VueInformation(mod);
+		vi = new VueInformation(mod, Model.algo.genetique);
 		lancer = new JButton("Lancer");
+		lancer.addActionListener(new EcouteurLancer(mod, Model.algo.genetique));
 		mutation = new JLabel("Probabilité de mutation (%): ");
 		mutaVal = new JTextField("");
 		mutaVal.getDocument().addDocumentListener(new DocumentListener() {

@@ -100,6 +100,6 @@ public class Genetique implements IAlgo {
 	}
 
 	public boolean arret() {
-		return (iteration < 100);
+		return (iteration < 1000);
 	}
 }

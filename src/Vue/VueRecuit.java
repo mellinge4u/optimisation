@@ -14,6 +14,7 @@ import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
+import ecouteurs.EcouteurLancer;
 import model.Model;
 
 public class VueRecuit extends JPanel implements Observer {
@@ -31,8 +32,9 @@ public class VueRecuit extends JPanel implements Observer {
 	public VueRecuit(Model mod) {
 		this.mod = mod;
 		this.vc = new VueClavier(mod, Model.algo.recuit);
-		vi = new VueInformation(mod);
+		vi = new VueInformation(mod, Model.algo.recuit);
 		lancer = new JButton("Lancer");
+		lancer.addActionListener(new EcouteurLancer(mod, Model.algo.recuit));
 		temp = new JLabel("Température: ");
 		tempVal = new JTextField("");
 		tempVal.getDocument().addDocumentListener(new DocumentListener() {

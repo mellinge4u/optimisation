@@ -160,15 +160,15 @@ public class Model extends Observable {
 	public void demarrerAlgo(algo a) {
 		switch (a) {
 		case genetique:
-			genet.getMeilleurClavier();
+			donneeGenetique = genet.getMeilleurClavier();
 			break;
 		case recuit:
-			recuit.getMeilleurClavier();
+			donneeRecuit = recuit.getMeilleurClavier();
 			break;
 		default:
 			break;
-
 		}
+		update();
 	}
 
 	public void update() {
