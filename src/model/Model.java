@@ -6,6 +6,10 @@ import clavier.Clavier;
 
 public class Model extends Observable {
 
+	public enum algo {
+		genetique, recuit
+	};
+
 	private int temperature;
 	private int mutation;
 	private int population;
@@ -14,7 +18,8 @@ public class Model extends Observable {
 	private boolean tmpCorrect;
 	private boolean popCorrect;
 	private boolean mutaCorrect;
-	private Clavier keyboard;	// TODO Changer le nom, il n'est pas top.	PS : Pareil pour les geter et seter de c't'objet
+	private DonneeAlgo donneeGenetique;
+	private DonneeAlgo donneeRecuit;
 
 	public Model() {
 		temperature = 0;
@@ -24,7 +29,8 @@ public class Model extends Observable {
 		tmpCorrect = true;
 		popCorrect = true;
 		mutaCorrect = true;
-		keyboard = new Clavier("bepoj");
+		donneeGenetique = new DonneeAlgo(new Clavier("azerty"), 0);
+		donneeRecuit = new DonneeAlgo(new Clavier("bepo"), 0);
 	}
 
 	public int getFctionObj() {
@@ -35,8 +41,20 @@ public class Model extends Observable {
 		return iteration;
 	}
 
-	public Clavier getKeyboard() {
-		return keyboard;
+	public Clavier getClavierGenetique() {
+		return donneeGenetique.getClavier();
+	}
+
+	public Clavier getClavierRecuit() {
+		return donneeRecuit.getClavier();
+	}
+
+	public int getIterationGenetique() {
+		return donneeGenetique.getIteration();
+	}
+
+	public int getIterationRecuit() {
+		return donneeRecuit.getIteration();
 	}
 
 	public int getMutation() {
@@ -73,8 +91,34 @@ public class Model extends Observable {
 		update();
 	}
 
-	public void setKeyboard(Clavier keyboard) {
-		this.keyboard = keyboard;
+	public void setClavierGenetique(Clavier clavier) {
+		this.donneeGenetique.setClavier(clavier);
+		update();
+	}
+
+	public void setClavierRecuit(Clavier clavier) {
+		this.donneeRecuit.setClavier(clavier);
+		update();
+	}
+
+	public void setIterationGenetique(int iteration) {
+		this.donneeGenetique.setIteration(iteration);
+		update();
+	}
+
+	public void setIterationRecuit(int iteration) {
+		this.donneeRecuit.setIteration(iteration);
+		update();
+	}
+
+	public void incIterationGenetique(int iteration) {
+		this.donneeGenetique.incIteration();
+		update();
+	}
+
+	public void incIterationRecuit(int iteration) {
+		this.donneeRecuit.incIteration();
+		update();
 	}
 
 	public void setMutaCorrect(boolean mutaCorrect) {
