@@ -18,12 +18,14 @@ public class VueClavier extends JPanel implements Observer {
 
 	private JButton[][] touches;
 	private Model mod;
+	private Model.algo algo;
 	private int i, j;
 
 	// TODO ne pas oublier le modele
 
-	public VueClavier(Model mod) {
+	public VueClavier(Model mod, Model.algo algo) {
 		super();
+		this.algo = algo;
 		this.mod = mod;
 		mod.addObserver(this);
 		// this.setPreferredSize(new Dimension(500,500));
@@ -41,9 +43,21 @@ public class VueClavier extends JPanel implements Observer {
 
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						javax.swing.JOptionPane.showMessageDialog(null,
-								"Évaluation de la touche : "
-										+ mod.getKeyboard().evaluationTouche(k));
+						switch (algo) {
+						case genetique:
+							javax.swing.JOptionPane.showMessageDialog(null,
+									"Évaluation de la touche : "
+											+ mod.getClavierGenetique()
+													.evaluationTouche(k));
+
+							break;
+						case recuit:
+							javax.swing.JOptionPane.showMessageDialog(null,
+									"Évaluation de la touche : "
+											+ mod.getClavierRecuit()
+													.evaluationTouche(k));
+							break;
+						}
 
 					}
 				});
@@ -54,7 +68,15 @@ public class VueClavier extends JPanel implements Observer {
 
 	@Override
 	public void update(Observable arg0, Object arg1) {
-		Clavier c = mod.getKeyboard();
+		Clavier c = null;
+		switch (algo) {
+		case genetique:
+			c = mod.getClavierGenetique();
+			break;
+		case recuit:
+			c = mod.getClavierRecuit();
+			break;
+		}
 		int touche;
 		char ch;
 		for (int i = 0; i < touches[0].length; i++) {

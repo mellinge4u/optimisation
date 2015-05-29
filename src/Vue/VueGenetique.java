@@ -30,20 +30,14 @@ public class VueGenetique extends JPanel implements Observer{
 
 	public VueGenetique(Model mod) {
 		this.mod = mod;
-		this.vc = new VueClavier(mod);
+		this.vc = new VueClavier(mod, Model.algo.genetique);
 		vi = new VueInformation(mod);
 		lancer = new JButton("Lancer");
 		mutation = new JLabel("Probabilité de mutation (%): ");
 		mutaVal = new JTextField("");
 		mutaVal.getDocument().addDocumentListener(new DocumentListener() {
 			
-			 private void updateData() {
-			        // mise à jour de l'attribut data
-			        String data = mutaVal.getText();
-			        update(data);
-			    }
-			
-			@Override
+			 @Override
 			public void removeUpdate(DocumentEvent e) {
 				String data = mutaVal.getText();
 				update(data);
@@ -80,13 +74,7 @@ public class VueGenetique extends JPanel implements Observer{
 		popVal = new JTextField("");
 		popVal.getDocument().addDocumentListener(new DocumentListener() {
 			
-			 private void updateData() {
-			        // mise à jour de l'attribut data
-			        String data = popVal.getText();
-			        update(data);
-			    }
-			
-			@Override
+			 @Override
 			public void removeUpdate(DocumentEvent e) {
 				String data = popVal.getText();
 				update(data);
@@ -135,6 +123,5 @@ public class VueGenetique extends JPanel implements Observer{
 	@Override
 	public void update(Observable o, Object arg) {
 		lancer.setEnabled(mod.isMutaCorrect() && mod.isPopCorrect());
-		
 	}
 }

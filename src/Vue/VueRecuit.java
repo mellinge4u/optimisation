@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -14,7 +16,7 @@ import javax.swing.event.DocumentListener;
 
 import model.Model;
 
-public class VueRecuit extends JPanel {
+public class VueRecuit extends JPanel implements Observer {
 
 	private VueClavier vc;
 	private JButton lancer;
@@ -28,20 +30,14 @@ public class VueRecuit extends JPanel {
 
 	public VueRecuit(Model mod) {
 		this.mod = mod;
-		this.vc = new VueClavier(mod);
+		this.vc = new VueClavier(mod, Model.algo.recuit);
 		vi = new VueInformation(mod);
 		lancer = new JButton("Lancer");
 		temp = new JLabel("Température: ");
 		tempVal = new JTextField("");
 		tempVal.getDocument().addDocumentListener(new DocumentListener() {
 			
-			 private void updateData() {
-			        // mise à jour de l'attribut data
-			        String data = tempVal.getText();
-			        update(data);
-			    }
-			
-			@Override
+			 @Override
 			public void removeUpdate(DocumentEvent e) {
 				String data = tempVal.getText();
 				update(data);
@@ -82,6 +78,11 @@ public class VueRecuit extends JPanel {
 		this.add(vc, BorderLayout.CENTER);
 		this.add(jp, BorderLayout.NORTH);
 		this.add(vi, BorderLayout.SOUTH);
+		mod.addObserver(this);
 	}
 
+	@Override
+	public void update(Observable arg0, Object arg1) {
+		lancer.setEnabled(mod.isTmpCorrect());
+	}
 }
