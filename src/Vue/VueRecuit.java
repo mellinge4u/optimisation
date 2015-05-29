@@ -13,6 +13,13 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import javax.swing.event.UndoableEditListener;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.Document;
+import javax.swing.text.Element;
+import javax.swing.text.Position;
+import javax.swing.text.Segment;
 
 import ecouteurs.EcouteurLancer;
 import model.Model;
@@ -34,9 +41,10 @@ public class VueRecuit extends JPanel implements Observer {
 		this.vc = new VueClavier(mod, Model.algo.recuit);
 		vi = new VueInformation(mod, Model.algo.recuit);
 		lancer = new JButton("Lancer");
+		lancer.setEnabled(false);
 		lancer.addActionListener(new EcouteurLancer(mod, Model.algo.recuit));
 		temp = new JLabel("Température: ");
-		tempVal = new JTextField("");
+		tempVal = new JTextField("10000");
 		tempVal.getDocument().addDocumentListener(new DocumentListener() {
 			
 			 @Override
