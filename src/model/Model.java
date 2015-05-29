@@ -2,6 +2,8 @@ package model;
 
 import java.util.Observable;
 
+import algorithmes.genetique.Genetique;
+import algorithmes.recuitSimule.RecuitSimule;
 import clavier.Clavier;
 
 public class Model extends Observable {
@@ -20,6 +22,8 @@ public class Model extends Observable {
 	private boolean mutaCorrect;
 	private DonneeAlgo donneeGenetique;
 	private DonneeAlgo donneeRecuit;
+	private Genetique genet;
+	private RecuitSimule recuit;
 
 	public Model() {
 		temperature = 0;
@@ -31,6 +35,8 @@ public class Model extends Observable {
 		mutaCorrect = true;
 		donneeGenetique = new DonneeAlgo(new Clavier("azerty"), 0);
 		donneeRecuit = new DonneeAlgo(new Clavier("bepo"), 0);
+		genet = new Genetique();
+		recuit = new RecuitSimule();
 	}
 
 	public int getFctionObj() {
@@ -149,6 +155,20 @@ public class Model extends Observable {
 	public void setTmpCorrect(boolean tmpCorrect) {
 		this.tmpCorrect = tmpCorrect;
 		update();
+	}
+
+	public void demarrerAlgo(algo a) {
+		switch (a) {
+		case genetique:
+			genet.getMeilleurClavier();
+			break;
+		case recuit:
+			recuit.getMeilleurClavier();
+			break;
+		default:
+			break;
+
+		}
 	}
 
 	public void update() {
