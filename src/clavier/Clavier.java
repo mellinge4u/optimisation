@@ -36,6 +36,10 @@ public class Clavier {
 		}
 	}
 
+	public Clavier(int[] lettres) {
+		this.lettres = lettres;
+	}
+	
 	public void genererClavier() {
 		int[] tmp = { -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
 				-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 };
@@ -92,6 +96,10 @@ public class Clavier {
 		return lettres[lettre];
 	}
 
+	public void setTouche(int lettre, int touche) {
+		lettres[lettre] = touche;
+	}
+	
 	public boolean isToucheUtilisee(int touche) {
 		boolean utilisee = false;
 		for (int i = 0; i < lettres.length && !utilisee; i++) {
@@ -102,12 +110,53 @@ public class Clavier {
 		return utilisee;
 	}
 
+	public int getLettre(int touche) {
+		boolean utilisee = false;
+		int lettre = -1;
+		for (int i = 0; i < lettres.length && !utilisee; i++) {
+			if (lettres[i] == touche) {
+				lettre = i;
+				utilisee = true;
+			}
+		}
+		return lettre;
+	}
+	
+	public int[] getTab() {
+		return lettres;
+	}
+	
 	public Clavier croisement(Clavier i) {
 		return null;
 	}
 
 	public Clavier mutation() {
-		return null;
+		Clavier newClavier = new Clavier(lettres.clone());
+		Random r = new Random();
+		int lettre = r.nextInt(26);
+		int touche2 = r.nextInt(40);
+		int lettre2 = getLettre(touche2);
+		if (lettre2 == -1) {	// la touche prise aléatoirement n'a pas de lettre assignée
+			setTouche(lettre, touche2);
+		} else {
+			int touche = getTouche(lettre);
+			setTouche(lettre, touche2);
+			setTouche(lettre2, touche);
+		}
+		return newClavier;
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+		Clavier clavier = (Clavier) obj;
+		boolean equals = true;
+		for (int i = 0; i < lettres.length && equals; i++) {
+			if (clavier.getTouche(i) != this.getTouche(i)) {
+				equals = false;
+			}
+		}
+		return equals;
+	}
+
 
 }

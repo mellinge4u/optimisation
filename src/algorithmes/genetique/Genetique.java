@@ -14,7 +14,6 @@ public class Genetique implements IAlgo {
 	
 	public Genetique(Model model) {
 		this.model = model;
-		listeClaviers = new ArrayList<Clavier>();
 	}
 
 	@Override
@@ -30,7 +29,10 @@ public class Genetique implements IAlgo {
 	}
 
 	public void initialisation() {
-		
+		listeClaviers = new ArrayList<Clavier>();
+		for (int i = 0; i < model.getPopulation(); i++) {
+			listeClaviers.add(new Clavier());
+		}
 	}
 	
 	public void evaluation() {
