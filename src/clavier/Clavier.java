@@ -57,8 +57,8 @@ public class Clavier {
 		int dist;
 		for (int i = 0; i < lettres.length; i++) {
 			for (int j = i + 1; j < lettres.length; j++) {
-				dist = Math.abs((i % 10) - (j % 10))
-						+ Math.abs((i / 10) - (j / 10));
+				dist = Math.abs((lettres[i] % 10) - (lettres[j] % 10))
+						+ Math.abs((lettres[i] / 10) - (lettres[j] / 10));
 				eval += (FreqBigrammes.getFrequence(i, j) * dist);
 			}
 		}
@@ -70,8 +70,8 @@ public class Clavier {
 		int dist;
 		for (int i = 0; i < lettres.length; i++) {
 			if (!(i == lettre)) {
-				dist = Math.abs((i % 10) - (lettre % 10))
-						+ Math.abs((i / 10) - (lettre / 10));
+				dist = Math.abs((lettres[i] % 10) - (lettres[lettre] % 10))
+						+ Math.abs((lettres[i] / 10) - (lettres[lettre] / 10));
 				eval += (FreqBigrammes.getFrequence(i, lettre) * dist);
 			}
 		}
