@@ -12,7 +12,6 @@ public class Model extends Observable {
 		genetique, recuit
 	};
 
-	private double temperature;
 	private int mutation;
 	private int population;
 	private int iteration;
@@ -24,17 +23,17 @@ public class Model extends Observable {
 	private DonneeAlgo donneeRecuit;
 	private Genetique genet;
 	private RecuitSimule recuit;
+	private double temperature;
 
 	public Model() {
-		temperature = 0;
 		mutation = 0;
 		population = 0;
 		// TODO instancier algo
 		tmpCorrect = true;
 		popCorrect = true;
 		mutaCorrect = true;
-		donneeGenetique = new DonneeAlgo(new Clavier("azerty"), 0);
-		donneeRecuit = new DonneeAlgo(new Clavier("bepo"), 0);
+		donneeGenetique = new DonneeAlgo(new Clavier("rand"), 0);
+		donneeRecuit = new DonneeAlgo(new Clavier("rand"), 0);
 		genet = new Genetique(this);
 		recuit = new RecuitSimule(this);
 	}
@@ -69,10 +68,6 @@ public class Model extends Observable {
 
 	public int getPopulation() {
 		return population;
-	}
-
-	public double getTemperature() {
-		return temperature;
 	}
 
 	public boolean isMutaCorrect() {
@@ -152,11 +147,6 @@ public class Model extends Observable {
 		update();
 	}
 
-	public void setTemperature(double temperature) {
-		this.temperature = temperature;
-		update();
-	}
-
 	public void setTmpCorrect(boolean tmpCorrect) {
 		this.tmpCorrect = tmpCorrect;
 		update();
@@ -179,6 +169,15 @@ public class Model extends Observable {
 	public void update() {
 		setChanged();
 		notifyObservers();
+	}
+
+	public double getTemperature() {
+		return temperature;
+	}
+
+	public void setTemperature(double temperature) {
+		this.temperature = temperature;
+		update();
 	}
 
 }

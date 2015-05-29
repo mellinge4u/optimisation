@@ -10,19 +10,18 @@ import algorithmes.IAlgo;
 public class RecuitSimule implements IAlgo {
 
 	protected Model model;
-	protected int cptECst; // s'incrémente quand "l'énergie du systeme reste
-							// constante sur plusieurs itérations
 	protected Clavier clavierPrec;
 	protected int evalClavPrec;
 	protected Clavier clavierCourant;
 	protected Clavier meilleurClavier;
+	protected int evalMeilClav;
 	protected int iteration;
+	protected double temperature;
 
 	public RecuitSimule(Model model) {
 		this.model = model;
 		this.clavierPrec = null;
 		evalClavPrec = Integer.MAX_VALUE;
-		cptECst = 0;
 		this.clavierCourant = model.getClavierRecuit();
 		this.meilleurClavier = clavierCourant;
 		iteration = 0;
@@ -34,15 +33,7 @@ public class RecuitSimule implements IAlgo {
 		do {
 			modification();
 			evaluation();
-			if (clavierCourant == clavierPrec) {
-				cptECst++;
-			}
-			if (cptECst == 10) {
-				// si on arrive sur un état d'équilibre thermodynamique après 10
-				// itérations , on diminue la température
-				diminuerTmp();
-				cptECst = 0;
-			}
+			diminuerTmp();
 			iteration++;
 		} while (arret());
 		DonneeAlgo da = new DonneeAlgo(meilleurClavier, iteration);
@@ -56,7 +47,9 @@ public class RecuitSimule implements IAlgo {
 		this.clavierPrec = null;
 		this.clavierCourant = model.getClavierRecuit();
 		this.meilleurClavier = clavierCourant;
-		cptECst = 0;
+		temperature = model.getTemperature();
+		System.out.println(temperature);
+		evalMeilClav = meilleurClavier.evaluation();
 		iteration = 0;
 		evalClavPrec = Integer.MAX_VALUE;
 	}
@@ -65,18 +58,27 @@ public class RecuitSimule implements IAlgo {
 	 * 
 	 */
 	public void evaluation() {
+		int evalClavCour;
 		if (clavierPrec != null) {
 			evalClavPrec = clavierPrec.evaluation();
 		}
-		if(evalClavPrec < clavierCourant.evaluation()){
-			meilleurClavier = clavierPrec;
+		evalClavCour = clavierCourant.evaluation();
+		if(evalClavPrec < evalClavCour){
 			Random r = new Random();
-			int i = r.nextInt((int) model.getTemperature());
+			int i = r.nextInt((int) temperature);
 			if(i > 1000){
 				clavierPrec = clavierCourant;
+				if (evalClavCour > evalMeilClav) {
+					meilleurClavier = clavierCourant;
+					evalMeilClav = evalClavCour;
+				}
 			}
 		} else {
 			clavierPrec = clavierCourant;
+			if (evalClavCour > evalMeilClav) {
+				meilleurClavier = clavierCourant;
+				evalMeilClav = evalClavCour;
+			}
 		}
 	}
 
@@ -84,17 +86,15 @@ public class RecuitSimule implements IAlgo {
 	 * applique une modification sur le clavier
 	 */
 	public void modification() {
-		clavierPrec = clavierCourant;
 		clavierCourant = clavierCourant.mutation();
 	}
 
 	public boolean arret() {
-		return model.getTemperature() < 1000;
+		return temperature > 1000;
 	}
 
 	public void diminuerTmp() {
-		Double d = model.getTemperature() * 0.99;
-		model.setTemperature(d);
+		temperature *= 0.999;
 	}
 
 }

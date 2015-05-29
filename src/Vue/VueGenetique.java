@@ -34,6 +34,7 @@ public class VueGenetique extends JPanel implements Observer{
 		this.vc = new VueClavier(mod, Model.algo.genetique);
 		vi = new VueInformation(mod, Model.algo.genetique);
 		lancer = new JButton("Lancer");
+		lancer.setEnabled(false);
 		lancer.addActionListener(new EcouteurLancer(mod, Model.algo.genetique));
 		mutation = new JLabel("Probabilité de mutation (%): ");
 		mutaVal = new JTextField("");

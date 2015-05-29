@@ -44,7 +44,7 @@ public class VueRecuit extends JPanel implements Observer {
 		lancer.setEnabled(false);
 		lancer.addActionListener(new EcouteurLancer(mod, Model.algo.recuit));
 		temp = new JLabel("Température: ");
-		tempVal = new JTextField("10000");
+		tempVal = new JTextField();
 		tempVal.getDocument().addDocumentListener(new DocumentListener() {
 			
 			 @Override
