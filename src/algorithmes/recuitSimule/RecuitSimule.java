@@ -16,6 +16,7 @@ public class RecuitSimule implements IAlgo {
 	protected int evalClavPrec;
 	protected Clavier clavierCourant;
 	protected Clavier meilleurClavier;
+	protected int iteration;
 
 	public RecuitSimule(Model model) {
 		this.model = model;
@@ -24,6 +25,7 @@ public class RecuitSimule implements IAlgo {
 		cptECst = 0;
 		this.clavierCourant = model.getClavierRecuit();
 		this.meilleurClavier = clavierCourant;
+		iteration = 0;
 	}
 
 	@Override
@@ -41,8 +43,10 @@ public class RecuitSimule implements IAlgo {
 				diminuerTmp();
 				cptECst = 0;
 			}
+			iteration++;
 		} while (arret());
-		return null;
+		DonneeAlgo da = new DonneeAlgo(meilleurClavier, iteration);
+		return da;
 	}
 
 	/*
@@ -53,6 +57,7 @@ public class RecuitSimule implements IAlgo {
 		this.clavierCourant = model.getClavierRecuit();
 		this.meilleurClavier = clavierCourant;
 		cptECst = 0;
+		iteration = 0;
 		evalClavPrec = Integer.MAX_VALUE;
 	}
 
