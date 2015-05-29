@@ -23,6 +23,8 @@ public class Genetique implements IAlgo {
 
 	@Override
 	public DonneeAlgo getMeilleurClavier() {
+		DonneeAlgo donnee;
+		Clavier best;
 		initialisation();
 		do {
 			iteration++;
@@ -31,8 +33,9 @@ public class Genetique implements IAlgo {
 			croisement(); // On n'en fait pas pour le moment
 			mutation();
 		} while (arret());
-		Clavier best = getMeilleur();
-		return new DonneeAlgo(best, iteration);
+		best = getMeilleur();
+		donnee = new DonneeAlgo(best, iteration);
+		return donnee;
 	}
 
 	public void initialisation() {

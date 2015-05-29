@@ -87,6 +87,11 @@ public class Model extends Observable {
 		return tmpCorrect;
 	}
 
+	public void setDonneGenetique(DonneeAlgo donnee) {
+		donneeGenetique = donnee;
+		update();
+	}
+	
 	public void setFctionObj(int fctionObj) {
 		this.fctionObj = fctionObj;
 		update();
