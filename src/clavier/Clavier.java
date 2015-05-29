@@ -8,7 +8,7 @@ import java.util.Random;
 
 public class Clavier {
 
-	private static int[] lettres = new int[26];
+	private int[] lettres = new int[26];
 
 	public Clavier() {
 		genererClavier();
