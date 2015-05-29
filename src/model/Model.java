@@ -35,8 +35,8 @@ public class Model extends Observable {
 		mutaCorrect = true;
 		donneeGenetique = new DonneeAlgo(new Clavier("azerty"), 0);
 		donneeRecuit = new DonneeAlgo(new Clavier("bepo"), 0);
-		genet = new Genetique();
-		recuit = new RecuitSimule();
+		genet = new Genetique(this);
+		recuit = new RecuitSimule(this);
 	}
 
 	public int getFctionObj() {

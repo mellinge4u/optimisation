@@ -1,13 +1,16 @@
 package algorithmes.recuitSimule;
 
 import model.DonneeAlgo;
+import model.Model;
 import clavier.Clavier;
 import algorithmes.IAlgo;
 
 public class RecuitSimule implements IAlgo {
 
-	public RecuitSimule() {
-		// TODO Auto-generated constructor stub
+	protected Model model;
+	
+	public RecuitSimule(Model model) {
+		this.model = model;
 	}
 
 	@Override

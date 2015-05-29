@@ -1,13 +1,20 @@
 package algorithmes.genetique;
 
+import java.util.ArrayList;
+
 import model.DonneeAlgo;
+import model.Model;
 import clavier.Clavier;
 import algorithmes.IAlgo;
 
 public class Genetique implements IAlgo {
 
-	public Genetique() {
-		// TODO Auto-generated constructor stub
+	protected ArrayList<Clavier> listeClaviers;
+	protected Model model;
+	
+	public Genetique(Model model) {
+		this.model = model;
+		listeClaviers = new ArrayList<Clavier>();
 	}
 
 	@Override
