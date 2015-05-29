@@ -10,21 +10,23 @@ import algorithmes.IAlgo;
 public class RecuitSimule implements IAlgo {
 
 	protected Model model;
-	protected Clavier clavierPrec;
-	protected int evalClavPrec;
 	protected Clavier clavierCourant;
+	protected int evalCourrant;
+	protected Clavier clavierModif;
 	protected Clavier meilleurClavier;
-	protected int evalMeilClav;
+	protected int evalMeil;
 	protected int iteration;
 	protected double temperature;
+	protected int limite;
 
 	public RecuitSimule(Model model) {
 		this.model = model;
-		this.clavierPrec = null;
-		evalClavPrec = Integer.MAX_VALUE;
-		this.clavierCourant = model.getClavierRecuit();
-		this.meilleurClavier = clavierCourant;
+		this.clavierCourant = null;
+		evalCourrant = Integer.MAX_VALUE;
+		this.clavierModif = model.getClavierRecuit();
+		this.meilleurClavier = clavierModif;
 		iteration = 0;
+		limite = 1000;
 	}
 
 	@Override
@@ -44,40 +46,32 @@ public class RecuitSimule implements IAlgo {
 	 * initialisation de différents paramètres
 	 */
 	public void initialisation() {
-		this.clavierPrec = null;
-		this.clavierCourant = model.getClavierRecuit();
+		this.clavierCourant = new Clavier();
+		this.clavierModif = clavierCourant;
 		this.meilleurClavier = clavierCourant;
 		temperature = model.getTemperature();
-		System.out.println(temperature);
-		evalMeilClav = meilleurClavier.evaluation();
+		evalCourrant = clavierCourant.evaluation();
+		evalMeil = evalCourrant;
 		iteration = 0;
-		evalClavPrec = Integer.MAX_VALUE;
 	}
 
 	/*
 	 * 
 	 */
 	public void evaluation() {
-		int evalClavCour;
-		if (clavierPrec != null) {
-			evalClavPrec = clavierPrec.evaluation();
-		}
-		evalClavCour = clavierCourant.evaluation();
-		if(evalClavPrec < evalClavCour){
+		int evalModif = clavierModif.evaluation();
+		if(evalCourrant < evalModif){
 			Random r = new Random();
 			int i = r.nextInt((int) temperature);
-			if(i > 1000){
-				clavierPrec = clavierCourant;
-				if (evalClavCour > evalMeilClav) {
-					meilleurClavier = clavierCourant;
-					evalMeilClav = evalClavCour;
-				}
+			if(i > limite){
+				clavierCourant = clavierModif;
+				evalCourrant = evalModif;
 			}
 		} else {
-			clavierPrec = clavierCourant;
-			if (evalClavCour > evalMeilClav) {
-				meilleurClavier = clavierCourant;
-				evalMeilClav = evalClavCour;
+			clavierCourant = clavierModif;
+			if (evalModif < evalMeil) {
+				meilleurClavier = clavierModif;
+				evalMeil = evalModif;
 			}
 		}
 	}
@@ -86,11 +80,11 @@ public class RecuitSimule implements IAlgo {
 	 * applique une modification sur le clavier
 	 */
 	public void modification() {
-		clavierCourant = clavierCourant.mutation();
+		clavierModif = clavierCourant.mutation();
 	}
 
 	public boolean arret() {
-		return temperature > 1000;
+		return temperature > limite;
 	}
 
 	public void diminuerTmp() {
