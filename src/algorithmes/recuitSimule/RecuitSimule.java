@@ -1,5 +1,6 @@
 package algorithmes.recuitSimule;
 
+import model.DonneeAlgo;
 import clavier.Clavier;
 import algorithmes.IAlgo;
 
@@ -10,7 +11,7 @@ public class RecuitSimule implements IAlgo {
 	}
 
 	@Override
-	public Clavier getMeilleurClavier() {
+	public DonneeAlgo getMeilleurClavier() {
 		// TODO Auto-generated method stub
 		return null;
 	}

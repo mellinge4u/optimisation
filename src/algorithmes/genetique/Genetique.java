@@ -1,5 +1,6 @@
 package algorithmes.genetique;
 
+import model.DonneeAlgo;
 import clavier.Clavier;
 import algorithmes.IAlgo;
 
@@ -10,7 +11,7 @@ public class Genetique implements IAlgo {
 	}
 
 	@Override
-	public Clavier getMeilleurClavier() {
+	public DonneeAlgo getMeilleurClavier() {
 		initialisation();
 		do {
 			evaluation();

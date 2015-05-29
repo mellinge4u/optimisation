@@ -1,9 +1,9 @@
 package algorithmes;
 
-import clavier.Clavier;
+import model.DonneeAlgo;
 
 public interface IAlgo {
 
-	public Clavier getMeilleurClavier();
+	public DonneeAlgo getMeilleurClavier();
 	
 }
